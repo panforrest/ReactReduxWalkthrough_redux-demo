@@ -22639,7 +22639,7 @@ var Todos = function (_Component) {
     key: 'updateTodo',
     value: function updateTodo(field, event) {
       //NOT updateTodo(event, field){
-      console.log('updateTodo: ' + field + ' == ' + event.target.value); //console.log('updateTodo: '+event.target.id+' == '+event.target.value)
+      //console.log('updateTodo: '+field+' == '+event.target.value)  //console.log('updateTodo: '+event.target.id+' == '+event.target.value)
       var nextTodo = Object.assign({}, this.state.nextTodo); //var
       nextTodo[event.target.id] = event.target.value;
       this.setState({
@@ -22651,6 +22651,11 @@ var Todos = function (_Component) {
     value: function addTodo(event) {
       //addTodo(){
       console.log('addTodo: ' + JSON.stringify(this.state.nextTodo));
+      var list = Object.assign([], this.state.list); //NOT WORK: let list = Object.assign({}, this.state.list)
+      list.push(this.state.nextTodo);
+      this.setState({
+        list: list
+      });
     }
   }, {
     key: 'render',
