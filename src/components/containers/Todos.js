@@ -5,6 +5,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import actions from '../../actions'
 
 class Todos extends Component {
   
@@ -33,17 +34,7 @@ class Todos extends Component {
   }
 
   addTodo(event){  //addTodo(){
-  	// console.log('addTodo: '+JSON.stringify(this.state.nextTodo))
-  	// let list = Object.assign([], this.state.list)  //NOT WORK: let list = Object.assign({}, this.state.list)
-  	// list.push(this.state.nextTodo)
-  	// this.setState({
-  	//   list: list,
-  	//   nextTodo:{
-   //      name:'',
-   //      description: ''
-  	//   },
-
-  	// })
+    this.props.createTodoItem(this.state.nextTodo)
 
   }
 
@@ -85,7 +76,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = (dispatch) => {
   return {
-    createTodoItem: (todo) => dispatch(constants.createTodoItem(todo))
+    createTodoItem: (todo) => dispatch(actions.createTodoItem(todo))
   }
 }
 

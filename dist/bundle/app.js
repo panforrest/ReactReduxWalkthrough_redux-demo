@@ -22617,6 +22617,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(187);
 
+var _actions = __webpack_require__(233);
+
+var _actions2 = _interopRequireDefault(_actions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22663,19 +22667,9 @@ var Todos = function (_Component) {
     }
   }, {
     key: 'addTodo',
-    value: function addTodo(event) {//addTodo(){
-      // console.log('addTodo: '+JSON.stringify(this.state.nextTodo))
-      // let list = Object.assign([], this.state.list)  //NOT WORK: let list = Object.assign({}, this.state.list)
-      // list.push(this.state.nextTodo)
-      // this.setState({
-      //   list: list,
-      //   nextTodo:{
-      //      name:'',
-      //      description: ''
-      //   },
-
-      // })
-
+    value: function addTodo(event) {
+      //addTodo(){
+      this.props.createTodoItem(this.state.nextTodo);
     }
   }, {
     key: 'render',
@@ -22735,7 +22729,7 @@ var stateToProps = function stateToProps(state) {
 var dispatchToProps = function dispatchToProps(dispatch) {
   return {
     createTodoItem: function createTodoItem(todo) {
-      return dispatch(constants.createTodoItem(todo));
+      return dispatch(_actions2.default.createTodoItem(todo));
     }
   };
 };
@@ -25196,10 +25190,14 @@ exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
 
-  var updatedState = Object.assign([], initialState);
+  var updatedState = Object.assign([], state);
   switch (action.type) {//switch(action.type) => {
     case _constants2.default.CREATE_TODO_ITEM:
       console.log('CREATE_TODO_ITEM: ' + JSON.stringify(action.data)); //+JSON.stringify(action.todos))
+      var updatedTodos = updatedState['todos'] == null ? [] : Object.assign([], updatedState['todos']);
+      updatedTodos.unshift(action.data);
+      updatedState['todos'] = updatedTodos;
+      return updatedState;
 
     default:
       return state;
@@ -25220,6 +25218,33 @@ exports.default = {
 
   CREATE_TODO_ITEM: 'CREATE_TODO_ITEM'
 
+};
+
+/***/ }),
+/* 233 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _constants = __webpack_require__(232);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+
+	createTodoItem: function createTodoItem(todo) {
+		return {
+			type: _constants2.default.CREATE_TODO_ITEM,
+			data: todo
+		};
+	}
 };
 
 /***/ })
