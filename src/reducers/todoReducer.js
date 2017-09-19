@@ -1,3 +1,12 @@
+  // let updatedState = Object.assign([], state)
+  // switch(action.type){  //switch(action.type) => {
+  //   case constants.CREATE_TODO_ITEM:
+  //     console.log('CREATE_TODO_ITEM: '+JSON.stringify(action.data))  //+JSON.stringify(action.todos))
+  //     let updatedTodos = (updatedState['todos']==null) ? [] : Object.assign([], updatedState['todos'])
+  //     updatedTodos.unshift(action.data)
+  //     updatedState['todos'] = updatedTodos
+  //     return updatedState
+
 import constants from '../constants'
 
 var initialState = {
@@ -8,14 +17,15 @@ var initialState = {
 }
 
 export default (state=initialState, action) => {
-  let updatedState = Object.assign([], state)
-  switch(action.type){  //switch(action.type) => {
+  let newState = Object.assign([], state)
+  switch(action.type){
     case constants.CREATE_TODO_ITEM:
-      console.log('CREATE_TODO_ITEM: '+JSON.stringify(action.data))  //+JSON.stringify(action.todos))
-      let updatedTodos = (updatedState['todos']==null) ? [] : Object.assign([], updatedState['todos'])
+      console.log('CREATE_TODO_ITEM: '+JSON.stringify(action.data))
+      // let updatedTodos = (newState.todos) ? [] : Object.assign([], newsState.todos) 
+      let updatedTodos = (newState['todos'] == null) ? [] : Object.assign([], newState.todos) 
       updatedTodos.unshift(action.data)
-      updatedState['todos'] = updatedTodos
-      return updatedState
+      newState['todos'] = updatedTodos
+      return newState
 
     default:
       return state
