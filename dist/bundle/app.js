@@ -22680,13 +22680,12 @@ var Todos = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var list = this.props.todo.todos.map(function (todo, i) {
-        return _react2.default.createElement(
-          'li',
-          { key: i },
-          todo.name
-        );
-      });
+      //   const list = this.props.todo.todos.map((todo, i) => {
+      //  return (
+      // <li key={i}>{todo.name}</li>
+      //  )
+      //   })
+      var list = this.props.todo.todos;
 
       return _react2.default.createElement(
         'div',
@@ -22702,7 +22701,13 @@ var Todos = function (_Component) {
           _react2.default.createElement(
             'ol',
             null,
-            list
+            list.map(function (item, i) {
+              return _react2.default.createElement(
+                'li',
+                { key: i },
+                item.name
+              );
+            })
           ),
           _react2.default.createElement('input', { value: this.state.nextTodo.name, onChange: this.updateTodo.bind(this, 'name'), className: 'form-control', type: 'text', id: 'name', placeholder: 'Name' }),
           _react2.default.createElement('br', null),

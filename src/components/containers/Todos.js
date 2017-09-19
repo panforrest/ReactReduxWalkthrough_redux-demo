@@ -48,18 +48,24 @@ class Todos extends Component {
   }
 
   render(){
-    const list = this.props.todo.todos.map((todo, i) => {
-	  return (
-		<li key={i}>{todo.name}</li>
-	  )
-    })
+  //   const list = this.props.todo.todos.map((todo, i) => {
+	 //  return (
+		// <li key={i}>{todo.name}</li>
+	 //  )
+  //   })
+    const list = this.props.todo.todos
 
 	return(
       <div className="constainer">
         <div className="col-md-4">
             <h3>To Do List</h3>
 		    <ol>
-              {list}
+		      {
+	            list.map((item, i) => {
+	              return <li key={i}>{item.name}</li>
+	            })		      	
+		      }
+
 		    </ol>
 
 		    <input value={this.state.nextTodo.name} onChange={this.updateTodo.bind(this, 'name')} className="form-control" type="text" id="name" placeholder="Name" /><br />
