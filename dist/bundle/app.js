@@ -22626,28 +22626,62 @@ var Todos = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Todos.__proto__ || Object.getPrototypeOf(Todos)).call(this));
 
     _this.state = {
+      nextTodo: {
+        name: '',
+        description: ''
+      },
       list: [{ name: 'Grocery', description: 'pick up groceries' }, { name: 'laudry', description: 'drop off laudry at dry cleaner' }]
     };
     return _this;
   }
 
   _createClass(Todos, [{
+    key: 'updateTodo',
+    value: function updateTodo(field, event) {
+      //NOT updateTodo(event, field){
+      console.log('updateTodo: ' + field + ' == ' + event.target.value); //console.log('updateTodo: '+event.target.id+' == '+event.target.value)
+      var nextTodo = Object.assign({}, this.state.nextTodo); //var
+      nextTodo[event.target.id] = event.target.value;
+      this.setState({
+        nextTodo: nextTodo
+      });
+    }
+  }, {
+    key: 'addTodo',
+    value: function addTodo(event) {
+      //addTodo(){
+      console.log('addTodo: ' + JSON.stringify(this.state.nextTodo));
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         { className: 'constainer' },
         _react2.default.createElement(
-          'ol',
-          null,
-          this.state.list.map(function (item, i) {
-            //NOT { this.state.list.map((item, i) => {
-            return _react2.default.createElement(
-              'li',
-              { key: i },
-              item.name
-            );
-          })
+          'div',
+          { className: 'col-md-4' },
+          _react2.default.createElement(
+            'ol',
+            null,
+            this.state.list.map(function (item, i) {
+              //NOT { this.state.list.map((item, i) => {
+              return _react2.default.createElement(
+                'li',
+                { key: i },
+                item.name
+              );
+            })
+          ),
+          _react2.default.createElement('input', { onChange: this.updateTodo.bind(this, 'name'), className: 'form-control', type: 'text', id: 'name', placeholder: 'Name' }),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('input', { onChange: this.updateTodo.bind(this, 'description'), className: 'form-control', type: 'text', id: 'description', placeholder: 'Description' }),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.addTodo.bind(this) },
+            'Add Todo'
+          )
         )
       );
     }
