@@ -31,7 +31,12 @@ class Todos extends Component {
   	let list = Object.assign([], this.state.list)  //NOT WORK: let list = Object.assign({}, this.state.list)
   	list.push(this.state.nextTodo)
   	this.setState({
-  	  list: list
+  	  list: list,
+  	  nextTodo:{
+        name:'',
+        description: ''
+  	  },
+
   	})
 
   }
@@ -47,8 +52,8 @@ class Todos extends Component {
 		        }
 		    </ol>
 
-		    <input onChange={this.updateTodo.bind(this, 'name')} className="form-control" type="text" id="name" placeholder="Name" /><br />
-		    <input onChange={this.updateTodo.bind(this, 'description')} className="form-control" type="text" id="description" placeholder="Description" /><br />
+		    <input value={this.state.nextTodo.name} onChange={this.updateTodo.bind(this, 'name')} className="form-control" type="text" id="name" placeholder="Name" /><br />
+		    <input value={this.state.nextTodo.description} onChange={this.updateTodo.bind(this, 'description')} className="form-control" type="text" id="description" placeholder="Description" /><br />
 		    <button onClick={this.addTodo.bind(this)}>Add Todo</button>
 		</div>
 	  </div>

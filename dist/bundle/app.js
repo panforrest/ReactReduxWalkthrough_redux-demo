@@ -22654,7 +22654,12 @@ var Todos = function (_Component) {
       var list = Object.assign([], this.state.list); //NOT WORK: let list = Object.assign({}, this.state.list)
       list.push(this.state.nextTodo);
       this.setState({
-        list: list
+        list: list,
+        nextTodo: {
+          name: '',
+          description: ''
+        }
+
       });
     }
   }, {
@@ -22678,9 +22683,9 @@ var Todos = function (_Component) {
               );
             })
           ),
-          _react2.default.createElement('input', { onChange: this.updateTodo.bind(this, 'name'), className: 'form-control', type: 'text', id: 'name', placeholder: 'Name' }),
+          _react2.default.createElement('input', { value: this.state.nextTodo.name, onChange: this.updateTodo.bind(this, 'name'), className: 'form-control', type: 'text', id: 'name', placeholder: 'Name' }),
           _react2.default.createElement('br', null),
-          _react2.default.createElement('input', { onChange: this.updateTodo.bind(this, 'description'), className: 'form-control', type: 'text', id: 'description', placeholder: 'Description' }),
+          _react2.default.createElement('input', { value: this.state.nextTodo.description, onChange: this.updateTodo.bind(this, 'description'), className: 'form-control', type: 'text', id: 'description', placeholder: 'Description' }),
           _react2.default.createElement('br', null),
           _react2.default.createElement(
             'button',
