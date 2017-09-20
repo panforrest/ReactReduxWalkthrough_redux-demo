@@ -10,6 +10,8 @@
 import constants from '../constants'
 
 var initialState = {
+
+  selectedItem: null, //{},
   todos: [
     {name:'Grocery', description: 'pick up groceries'},
   	{name: 'laudry', description: 'drop off laudry at dry cleaner'}
@@ -25,6 +27,13 @@ export default (state=initialState, action) => {
       let updatedTodos = (newState['todos'] == null) ? [] : Object.assign([], newState.todos) 
       updatedTodos.unshift(action.data)
       newState['todos'] = updatedTodos
+      return newState // triggers re-rencder on registered containder components
+
+    case constants.ITEM_SELECTED:
+      console.log('ITEM_SELECTED: '+JSON.stringify(action.data))
+      // let selected = Object.assign({}, state.selectedItem)
+      // selected = action.data
+      newState['selectedItem'] = action.data
       return newState
 
     default:
